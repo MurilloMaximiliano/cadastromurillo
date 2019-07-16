@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "model": "Iphone X",
+      "price": "4.500",
+      "trademark": "Apple",
+      "id": 1,
+      "specifications": "128 GB",
+      "specificatins": "dpoj"
+    },
+    {
+      "model": "s10",
+      "price": "2.000",
+      "trademark": " SAMSUNG",
+      "id": 2,
+      "specifications": "64 GB"
+    },
+    {
+      "model": "WWW",
+      "price": "5900",
+      "trademark": "TV 55",
+      "id": 3,
+      "specifications": "4K"
+    },
+    {
+      "model": "Moto G1",
+      "price": "3233",
+      "trademark": " Motorola",
+      "id": 4,
+      "specifications": "64Gb"
+    }
+  ]
+}
