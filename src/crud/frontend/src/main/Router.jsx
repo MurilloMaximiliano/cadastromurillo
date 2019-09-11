@@ -5,6 +5,7 @@ import UserCrud from '../components/User/UserCrud'
 import UserCrud2 from '../components/User/UserCrud2'
 import Contato from '../components/tamplets/contato'
 import Pedidos from '../components/tamplets/Pedidos'
+import Agro from "../components/tamplets/Agro";
 
 
 
@@ -16,6 +17,8 @@ export default props =>
      <Route path='/product' component={UserCrud2}/>
      <Route path='/users3' component={Contato}/>
      <Route path='/users2' component={Pedidos}/>
+     <Route path='/users4' component={Agro}/>
+
 
 
      <Redirect from='*' to='/' />

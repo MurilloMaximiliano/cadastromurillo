@@ -1,151 +1,54 @@
 import React from "react";
+import Main from '../tamplets/Main'
+
+import logo6 from '../../assets/imgs/logo6.png'
+import logo9 from '../../assets/imgs/logo9.jpg'
+import logo10 from '../../assets/imgs/logo10.jpg'
+import logo11 from '../../assets/imgs/logo11.jpg'
 const headerProps = {
-  icon: "phone",
-  title:"Contatos",
-  subtitle:"Entre em contato  por meio de nossas mídias sociais"
+    icon: "photo",
+    title:"Galeria",
+    
 }
 
-
-
-
-
-class App extends React.Component {
-  state = {
-    todoList: [],
-    tarefa: "",
-    detalheTarefa: "",
-    editingId: null,
-    stylesInput: {
-      marginRight: '8px'
-    },
-    stylesDetalhe:{
-      marginLeft: '15px',
-      marginRight: '8px'
-    },
-    stylesButton: {
-      margin: '10px'
-    },
-    mode:'view'
-  };
-
-  onChangeText = evento => {
-    this.setState({
-      tarefa: evento.target.value
-    });
-  };
-  onChangeDetalhe = evento => {
-    this.setState({
-      detalheTarefa: evento.target.value
-    });
-  };
-
-  onAddTodo = evento => {
-    evento.preventDefault();
-    const { tarefa, todoList, editingId, detalheTarefa } = this.state;
-    if (editingId === null) {
-      const newTodo = {
-        id: todoList.length + 1,
-        ativo: true,
-        tarefa: tarefa,
-        detalheTarefa: detalheTarefa
-      };
-      this.setState({
-        tarefa: "",
-        detalheTarefa: "",
-        todoList: [...todoList, newTodo]
-      });
-      return;
-    }
-
-    const editingTodo = todoList.find(todo => todo.id === editingId);
-    const editTodoObject = {
-      ...editingTodo,
-      tarefa: tarefa,
-      detalheTarefa: detalheTarefa
-    };
-
-    const newTodo = todoList.map(todo =>
-      todo.id === editingId ? editTodoObject : todo
-    );
-    this.setState({
-      todoList: newTodo,
-      tarefa: "",
-      detalheTarefa: "",
-      editingId: null
-    });
-  };
+export default props =>
+<Main className="div1"icon="home" title="Início"{...headerProps} >
   
-  removeTodo = id => () => {
-    const { todoList } = this.state;
-    const newTodoList = todoList.filter(todo => todo.id !== id);
-    this.setState({
-      todoList: newTodoList
-    });
-  };
+    
+<div className="display -4"><h1 className="focus-in-contract-bck">Galeria</h1></div>
+
+
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src={logo6} class="d-block w-100" alt="..."/>
+    </div>
+    <div class="carousel-item">
+      <img src={logo9} class="d-block w-100" alt="..."/>
+    </div>
   
-  editTodo = id => () => {
-    // id sendo iditado = id
-    const { todoList } = this.state;
-    const newTodoList = todoList.find(todo => todo.id === id);
-    this.setState({
-      tarefa: newTodoList.tarefa,
-      detalheTarefa: newTodoList.detalheTarefa,
-      editingId: id,
-      mode: 'edit'
-    });
-  }
+    <div class="carousel-item">
+      <img src={logo10} class="d-block w-100" alt="..."/>
+    </div>
+    <div class="carousel-item">
+      <img src={logo11} class="d-block w-100" alt="..."/>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
-  buttonAlterar = () => {
-    this.setState({
-      mode: 'view'
-    })
-  }
-
-  render() {
-    const { todoList, tarefa, detalheTarefa, stylesInput, stylesButton, stylesDetalhe } = this.state;
-        
-   if(this.state.mode == 'edit') {
-     return (
-      <div>
-        {todoList.map(todo => (
-        <p key={todo.id}>
-          {todo.tarefa} - {todo.detalheTarefa} 
-          <button onClick={this.editTodo(todo.id)} style={stylesButton}>Editar</button>
-          <button onClick={this.removeTodo(todo.id)} style={stylesButton}>Remover</button>
-         </p> ))}
-
-        <form onSubmit={this.onAddTodo}>
-          <span style={stylesInput}>text:</span>
-          <input type="text" value={tarefa} onChange={this.onChangeText} /> 
-          <span style={stylesDetalhe}>text2:</span>
-          <input type="text" value={detalheTarefa} onChange={this.onChangeDetalhe} />
-          <button type="submit" onClick={this.buttonAlterar} style={stylesButton}>Alterar</button>
-        </form>
-      </div>  
-      )
-    } else {
-       return (
-        <div>
-          {todoList.map(todo => (
-          <p key={todo.id}>
-           {todo.tarefa} - {todo.detalheTarefa} 
-           <button onClick={this.editTodo(todo.id)} style={stylesButton}>Editar</button>
-           <button onClick={this.removeTodo(todo.id)} style={stylesButton}>Remover</button>
-           </p> ))}
-
-          <form onSubmit={this.onAddTodo}>
-           <span style={stylesInput}>Texto:</span>
-           <input type="text" value={tarefa} onChange={this.onChangeText} /> 
-           <span style={stylesDetalhe}>Tarefa:</span>
-           <input type="text" value={detalheTarefa} onChange={this.onChangeDetalhe} />
-           <button type="submit"  style={stylesButton}>Cadastrar</button>
-           </form>
-        </div>
-       )
-      }
-        
-  }
-
-
-}
-export default App;
+</Main>

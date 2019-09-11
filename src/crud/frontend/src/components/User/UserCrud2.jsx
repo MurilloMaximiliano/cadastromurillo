@@ -6,13 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 const headerProps = {
-    icon: "phone",
-    title:"Produtos",
-    subtitle:"Cadastro de Produtos!"
+    icon: "fa fa-comment-o",
+    title:"Forum",
+  
 }
-   const baseUrl = 'http://localhost:3004/users'
+   const baseUrl = 'http://localhost:3005/users'
    const initialState = {
-       user: {model: '', price: '', trademark:' ', id: '', specifications:''},
+       user: {  name:'', email:'', comentários:''},
        list: []
    }
 
@@ -52,78 +52,66 @@ componentWillMount() {
          user[event.target.name] = event.target.value
          this.setState({user})
      }
+     
 
      renderForm(){
          return(
+         
            <div className="form" align-items="center">
+                <h1 className="focus-in-contract-bck" ><bold>Vamos Conversar?</bold></h1>
                <div className="row">
-                   <div className="col-10 col-md-5">
-                       <div className="form-group">
-                           <label>Price:</label>  
-                           {'   '}
-                           
-                           <input type="number" className="form-control"
+                   
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            <label  class="text-uppercase, tracking-in-expand">Nome</label>
+                            <input type="text" className="form-control"
+                                name="name"
+                                value={this.state.user.name}
+                                onChange={e => this.updateField(e)}
+                                placeholder="Digite o nome..." />
+                        </div>
+                    </div>
                       
-                           name="price"
-                           value={this.state.user.price}
-                           onChange={e => this.updateField(e)}
-                           placeHolder="Digite preço..."/>
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            <label class="text-uppercase, tracking-in-expand">E-mail</label>
+                            <input type="text" className="form-control"
+                                name="email"
+                               
+                                value={this.state.user.email}
+                                onChange={e => this.updateField(e)}
+                                placeholder="Digite o e-mail..." />
                         </div>
                     </div>
-                    <div className="col-12 col-md-5">
-                        <div className="form-group">
-                            <label>Model:</label>
-                            {'   '}
-                            <input type="text" className="form-control"
-                            name="model"
-                            value={this.state.user.model}
-                            onChange={e => this.updateField(e)}
-                            placeHolder="Digite o produto..."/>
-                          
-                        </div>
-
-                    </div>
-                    <div className="col-12 col-md-5">
-                        <div className="form-group">
-                            <label>Trademark:</label>
-                            {'   '}
-                            <input type="text" className="form-control"
-                            
-                            name="trademark"
-                            value={this.state.user.trademark}
-                            onChange={e => this.updateField(e)}
-                            placeHolder="Digite a marca..."/>
-                      </div>
-                    </div>
-                    <div className="col-12 col-md-5">
-                        <div className="form-group">
-                            <label>Specifications:</label>
-                            {'   '}
-                            <input type="text" className="form-control"
-                            
-                            name="specifications"
-                            value={this.state.user.specifications}
-                            onChange={e => this.updateField(e)}
-                            placeHolder="Digite a marca..."/>
-                      </div>
-                    </div>
-                    
                  </div>
-                 
-               <div className="row">
-                    <div className="col-12 dflex justify-content-end">
-                     <button className="btn btn-primary"
+                 <div className="col-12 col-md-6, titulo2">
+                        <div className="form-group, titulo2">
+                        <label for="exampleFormControlTextarea1"class="text-uppercase">Comentarios:</label>
+                            
+                          
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="9"
+                
+                            name="comentários"
+                            value={this.state.user.comentários}
+                            onChange={e => this.updateField(e)}
+                            placeHolder="Digite o comentário..."/>
+                      </div>
+                    </div>
+                    <div  className="row">
+                    <div className="col-12 dflex justify-content-end, titulo">
+                     <button class="btn btn-outline-success"
                          onClick={e =>this.save(e)}>
-                         Cadastrar
+                         Enviar
                     </button>
                    {' '}
-                    <button className="btn btn-secondary ml-9"
+                    <button class="btn btn-outline-success"
                     onClick={e =>this.clear(e)}>
                         Cancelar
                         </button> 
                         
                      </div>
                 </div>
+                
                 <hr />
          </div>
     )
@@ -139,15 +127,15 @@ remove(user){
 }
 renderTable(){
     return (
+       
         <table className="m-t10px">
             <thead>
                 <tr>
-                <th>Id</th>
-                <th>Model</th>
-                <th>Price</th>
-                {' '}
-                 <th>Trademark</th>
-                 <th>Specifications</th>
+                
+        <th>Comentários</th>
+        <th> Nome </th>   
+        <th>E-mail</th>
+            
                 
                 </tr>
             </thead>
@@ -161,28 +149,24 @@ renderRows(){
     return this.state.list.map(user =>{
         return(
           <tr key={user.id}>
-               <td>{user.id}</td> 
-             <td>{user.model}</td> 
-             {' '}
-             <td>{user.price}</td>
-             {' '}
-             <td>{user.trademark}</td> 
-             <td>{user.specifications}</td>
+             <td>{user.comentários}</td> 
+             <td>{user.name}</td> 
+             <td>{user.email}</td> 
              
-             <td>
+        {/*} <td>
                  
-                 <button className="btn btn-warning"
+                 <button class="btn btn-outline-success"
                   onClick={()=>this.load(user)}>
-                     editar
+                   <i className="fa fa-pencil"></i>
                  </button>
                  {' '}
-                 <button className="btn btn-warning ml-10"
+                  <button className="btn btn-warning ml-10"
                  
                  onClick={()=>this.remove(user)}>
-                     remover
+                    <i className="fa fa-trash"></i>
                  </button>
                 
-             </td>
+        </td>*/}
           </tr>  
         )
     })
